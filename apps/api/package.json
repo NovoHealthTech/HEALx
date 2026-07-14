@@ -6,11 +6,15 @@
     "build": "nest build api",
     "start": "nest start api",
     "start:dev": "nest start api --watch",
-    "test": "jest --passWithNoTests",
+    "test": "jest --config jest.config.js",
+    "test:e2e": "jest --config test/jest-e2e.config.js",
     "typecheck": "tsc -p tsconfig.app.json --noEmit"
   },
   "dependencies": {
     "@healx/config": "*",
     "@healx/types": "*"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
   }
 }

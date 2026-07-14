@@ -310,6 +310,12 @@ apps/stellar-service/.env.example
 
 ---
 
+## Local Development
+
+See [docs/local-development.md](docs/local-development.md) for Docker Compose, PostgreSQL, Redis, and Prisma migration workflow instructions.
+
+---
+
 # Contribution Model
 
 HealX is designed for milestone-driven infrastructure development.
