@@ -1,0 +1,16 @@
+{
+  "name": "@healx/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "nest build api",
+    "start": "nest start api",
+    "start:dev": "nest start api --watch",
+    "test": "jest --passWithNoTests",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit"
+  },
+  "dependencies": {
+    "@healx/config": "*",
+    "@healx/types": "*"
+  }
+}

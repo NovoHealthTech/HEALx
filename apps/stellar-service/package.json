@@ -1,0 +1,16 @@
+{
+  "name": "@healx/stellar-service",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "nest build stellar-service",
+    "start": "nest start stellar-service",
+    "start:dev": "nest start stellar-service --watch",
+    "test": "jest --passWithNoTests",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit"
+  },
+  "dependencies": {
+    "@healx/config": "*",
+    "@healx/types": "*"
+  }
+}
