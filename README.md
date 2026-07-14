@@ -1,380 +1,354 @@
 # HealX
 
-> **Medical GRC & Audit API**
-> A blockchain-enabled compliance platform for healthcare organizations, built with **NestJS** and powered by the **Stellar Network**.
+**HealX** is a healthcare Governance, Risk, and Compliance (GRC) platform that provides a developer-first API for managing compliance evidence, audit workflows, risk management, and regulatory reporting.
 
-HealX is a developer-first API that helps hospitals, clinics, laboratories, insurers, and healthcare auditors manage governance, risk, and compliance (GRC) operations through a secure, verifiable, and monetized API.
+Built with **NestJS** and powered by the **Stellar Network**, HealX combines enterprise-grade backend architecture with blockchain-based payment settlement and access verification, enabling organizations to securely share compliance data while monetizing premium API access.
 
-Rather than storing sensitive healthcare data on-chain, HealX combines traditional cloud infrastructure with blockchain-based payment settlement and access verification. Compliance evidence, audit logs, reports, and documents remain securely stored off-chain, while Stellar provides transparent payments, immutable proof of access, and programmable authorization.
-
----
-
-## Why HealX?
-
-Healthcare organizations generate thousands of compliance artifacts every year:
-
-* Incident reports
-* Risk assessments
-* Internal audits
-* Policy acknowledgements
-* Equipment maintenance logs
-* Staff certifications
-* Regulatory evidence
-* Corrective action plans (CAPA)
-
-Sharing these records with external auditors is often slow, manual, and difficult to verify.
-
-HealX solves this by providing a secure API where:
-
-* Organizations upload and organize compliance evidence.
-* Auditors pay for access using Stellar.
-* Smart contracts verify payment and authorization.
-* The API delivers the requested evidence instantly.
-* Every access request is cryptographically verifiable.
+The platform is designed as a modular monorepo to support scalable development across compliance services, payment infrastructure, reporting, and shared domain packages.
 
 ---
 
-# Core Features
+# Overview
 
-### Governance
+Healthcare organizations operate under strict regulatory requirements, generating large volumes of compliance evidence, audit records, policies, incident reports, and risk assessments.
 
-* Organization management
-* Multi-tenant architecture
-* User & role management
-* Department management
-* Policy lifecycle management
-* Document versioning
+Unfortunately, these records are often scattered across multiple systems, making audits expensive, slow, and difficult to verify.
 
----
+HealX provides a unified API platform for managing healthcare governance and compliance through structured services that support:
 
-### Risk Management
+* governance and organizational management,
+* regulatory compliance frameworks,
+* audit planning and evidence collection,
+* risk assessment and treatment,
+* incident management,
+* secure document storage,
+* programmable API monetization using Stellar.
 
-* Risk register
-* Risk scoring
-* Risk treatment plans
-* Risk ownership
-* Risk dashboards
-* Residual risk tracking
+Rather than storing sensitive healthcare information on-chain, HealX uses Stellar as a trusted payment and authorization layer while maintaining protected data securely off-chain.
 
 ---
 
-### Compliance
+# Core Modules
 
-* Framework management
-* HIPAA mapping
-* ISO 27001 mapping
-* SOC 2 mapping
-* NIST mapping
-* Custom regulatory frameworks
+## Authentication & Access Control
 
----
+HealX begins with a secure authentication and authorization layer built for enterprise healthcare organizations.
 
-### Audit Management
+It supports:
 
-* Audit planning
-* Audit execution
-* Evidence requests
-* Evidence submissions
-* Findings
-* Observations
-* Corrective actions
-* Audit reports
+* organization authentication
+* JWT authentication
+* API key management
+* role-based access control (RBAC)
+* attribute-based permissions (ABAC)
+* multi-tenant access isolation
+* secure session management
+
+This forms the foundation for every protected API within the platform.
 
 ---
 
-### Incident Management
+## Organization Management
 
-* Security incidents
-* Clinical incidents
-* Data breaches
-* Root cause analysis
-* CAPA workflow
+Organizations are the primary tenants within HealX.
 
----
+Capabilities include:
 
-### Evidence Management
+* organization onboarding
+* department management
+* user invitations
+* role assignment
+* tenant isolation
+* organization settings
+* audit ownership
 
-* Secure evidence uploads
-* S3 object storage
-* File integrity verification
-* Metadata indexing
-* Version history
+This ensures each healthcare organization operates within an isolated compliance environment.
 
 ---
 
-### Reporting
+## Governance & Compliance
 
-* Compliance dashboards
-* Risk dashboards
-* Audit dashboards
-* PDF report generation
-* Export APIs
+HealX enables organizations to implement structured compliance programs.
 
----
+The platform supports:
 
-### Payments
+* compliance frameworks
+* regulatory controls
+* policy management
+* evidence mapping
+* control ownership
+* compliance status tracking
+* framework versioning
 
-Built on Stellar.
-
-Every premium endpoint can require payment before execution.
-
-Examples:
-
-* Generate Compliance Report
-* Access Audit Evidence
-* Download Regulatory Package
-* Request Historical Logs
-* Third-party Audit Access
-
-Payments settle almost instantly with minimal fees.
+Designed to support standards such as HIPAA, ISO 27001, SOC 2, NIST, and custom regulatory frameworks.
 
 ---
 
-# How It Works
+## Risk Management
+
+Organizations can identify, assess, and mitigate operational risks through structured workflows.
+
+Capabilities include:
+
+* risk registers
+* risk scoring
+* likelihood and impact analysis
+* treatment planning
+* residual risk tracking
+* ownership assignment
+* risk reporting
+
+The risk module integrates directly with audits and compliance controls.
+
+---
+
+## Audit Management
+
+HealX streamlines internal and external audit processes.
+
+Supported capabilities include:
+
+* audit planning
+* evidence requests
+* audit findings
+* observations
+* corrective actions (CAPA)
+* audit reports
+* historical audit records
+
+The audit workflow creates a complete, traceable compliance history.
+
+---
+
+## Evidence Management
+
+Evidence is central to regulatory compliance.
+
+HealX provides:
+
+* secure evidence uploads
+* metadata indexing
+* version history
+* S3-backed storage
+* integrity verification
+* evidence lifecycle management
+
+Sensitive documents remain securely stored off-chain while maintaining verifiable access records.
+
+---
+
+## Incident Management
+
+Healthcare organizations can document operational and security incidents through structured workflows.
+
+The platform supports:
+
+* incident reporting
+* severity classification
+* investigation tracking
+* root cause analysis
+* corrective actions
+* incident timelines
+
+Incident records become part of the organization's overall compliance posture.
+
+---
+
+## Reporting
+
+HealX provides automated reporting capabilities across all governance modules.
+
+Reports include:
+
+* compliance summaries
+* audit reports
+* risk dashboards
+* executive reports
+* evidence packages
+* PDF generation
+* export APIs
+
+Reports can be generated programmatically through the public API.
+
+---
+
+## Stellar Payment Layer
+
+HealX uses the Stellar Network as a programmable payment and authorization layer.
+
+The Stellar service enables:
+
+* API micropayments
+* premium endpoint access
+* transaction verification
+* USDC settlement
+* programmable billing
+* immutable payment records
+
+Rather than storing compliance data on-chain, Stellar is responsible for payment settlement and cryptographic verification before protected resources are served.
+
+---
+
+# System Architecture
+
+HealX is built as a modular monorepo with clearly defined service boundaries.
+
+| Layer          | Technology        |
+| -------------- | ----------------- |
+| API            | NestJS            |
+| Database       | PostgreSQL        |
+| ORM            | Prisma            |
+| Queue          | BullMQ            |
+| Cache          | Redis             |
+| Object Storage | AWS S3            |
+| Blockchain     | Stellar + Soroban |
+| Documentation  | Swagger / OpenAPI |
+| Shared Config  | @healx/config     |
+| Shared Types   | @healx/types      |
+
+---
+
+# Repository Structure
 
 ```text
-Healthcare Organization
-          │
-          │ Upload Evidence
-          ▼
-      HealX API
-          │
-          ├───────────────► S3 Storage
-          │
-          │
-Auditor Requests Evidence
-          │
-          ▼
- Stellar Smart Contract
-          │
- Verify Payment
-          │
-          ▼
-      NestJS Guard
-          │
- Verify Transaction
-          │
-          ▼
-   Return Requested Data
-```
-
----
-
-# Architecture
-
-```
-apps/
+healx/
 │
-├── api/
-│   ├── auth
-│   ├── organizations
-│   ├── users
-│   ├── policies
-│   ├── risks
-│   ├── compliance
-│   ├── audits
-│   ├── evidence
-│   ├── incidents
-│   ├── payments
-│   ├── reports
-│   └── common
+├── apps/
+│   ├── api/                 # NestJS backend
+│   └── stellar-service/     # Stellar payment integration
+│
+├── packages/
+│   ├── config/              # Shared configuration
+│   ├── types/               # Shared domain types
+│   └── sdk/                 # Future API client SDK
 │
 ├── contracts/
-│   └── soroban
-│
-├── shared/
+│   └── soroban/             # Smart contracts
 │
 └── docs/
 ```
 
 ---
 
-# Technology Stack
+# MVP Delivery Plan
 
-## Backend
+Development follows structured infrastructure milestones:
 
-* NestJS
-* TypeScript
+1. Authentication & multi-tenancy
+2. Organization management
+3. Governance & compliance
+4. Risk management
+5. Audit workflows
+6. Evidence management
+7. Reporting engine
+8. Stellar payment integration
+9. Public API & SDK
+10. Production hardening
+
+Each milestone expands the platform while maintaining strict module boundaries and backwards compatibility.
+
+---
+
+# Getting Started
+
+## Requirements
+
+* Node.js 20+
+* npm 10+
 * PostgreSQL
-* Prisma ORM
 * Redis
-* BullMQ
-* AWS S3
-* JWT Authentication
-* Swagger / OpenAPI
 
 ---
 
-## Blockchain
+## Installation
 
-* Stellar Network
-* Soroban Smart Contracts
-* USDC Payments
-* Wallet Authentication
-* Transaction Verification
-
----
-
-## Infrastructure
-
-* Docker
-* GitHub Actions
-* AWS
-* CloudFront
-* ECS / EC2
-* Terraform (planned)
-
----
-
-# API Flow
-
-Example:
-
-```
-POST /reports/compliance
-
-↓
-
-NestJS Payment Guard
-
-↓
-
-Verify Stellar Transaction
-
-↓
-
-Payment Valid?
-
-↓
-
-Yes
-
-↓
-
-Generate PDF
-
-↓
-
-Store in S3
-
-↓
-
-Return Download URL
+```bash
+npm install
 ```
 
 ---
 
-# Monetization
+## Run development environment
 
-HealX is designed as a commercial API platform.
-
-Pricing models include:
-
-### Pay Per Request
-
-Clients pay a fixed amount of USDC to access premium endpoints.
-
-Examples:
-
-| Endpoint                  | Example Fee |
-| ------------------------- | ----------- |
-| Generate Audit Report     | 0.50 USDC   |
-| Download Evidence Package | 0.25 USDC   |
-| Compliance Score          | 0.10 USDC   |
-| Historical Audit Logs     | 0.20 USDC   |
+```bash
+npm run dev
+```
 
 ---
 
-### Subscription Plans
+## Architecture validation
 
-* Starter
-* Professional
-* Enterprise
+Before contributing:
 
-Subscriptions unlock higher request quotas while certain premium operations still require micro-payments.
-
----
-
-### Enterprise Licensing
-
-Healthcare organizations can deploy private instances with:
-
-* Dedicated infrastructure
-* Custom compliance frameworks
-* SLA support
-* White-label branding
+```bash
+npm run check:architecture
+npm run check:boundaries
+```
 
 ---
 
-# Security
+# Environment Setup
 
-Security is a first-class concern.
+Create a root `.env` from the provided template before running services locally.
 
-* JWT Authentication
-* Role-Based Access Control (RBAC)
-* Attribute-Based Access Control (ABAC)
-* Audit logging
-* Immutable access records
-* File integrity hashing
-* Encryption at rest
-* Encryption in transit
-* Rate limiting
-* API key support
-* Multi-tenancy isolation
+Each workspace may also define:
+
+```text
+apps/api/.env.example
+apps/stellar-service/.env.example
+```
 
 ---
 
-# Blockchain Philosophy
+# Documentation
 
-HealX does **not** store protected health information (PHI) on-chain.
-
-Instead, Stellar is used for:
-
-* Payment settlement
-* Access verification
-* Immutable proof of access
-* Smart contract authorization
-
-Sensitive data remains securely stored off-chain to support privacy regulations such as HIPAA while still benefiting from blockchain-based trust and transparency.
+* Architecture: `docs/architecture.md`
+* API Reference: `docs/api.md`
+* MVP Scope: `docs/mvp-scope.md`
+* Contributor Guide: `CONTRIBUTING.md`
+* Roadmap: `docs/roadmap.md`
 
 ---
 
-# Roadmap
+# Contribution Model
 
-### Phase 1
+HealX is designed for milestone-driven infrastructure development.
 
-* Authentication
-* Organizations
-* RBAC
-* Evidence Upload
-* Audit Module
-* Payments
-* Swagger Documentation
+To maintain consistency:
 
-### Phase 2
+* keep changes within a single module
+* use shared types for cross-service communication
+* avoid duplicating business logic
+* respect service boundaries (API vs Stellar vs shared packages)
+* maintain backwards-compatible APIs where possible
+* ensure healthcare compliance workflows remain auditable and traceable
 
-* Risk Register
-* Compliance Frameworks
-* Policy Management
-* Reporting Engine
-* PDF Generation
+---
 
-### Phase 3
+# Current State
 
-* Soroban Smart Contracts
-* Automated Payment Verification
-* Multi-Tenant Billing
-* API Marketplace
+This repository provides the foundation for the HealX platform.
 
-### Phase 4
+Current scaffolding includes:
 
-* AI Compliance Assistant
-* Automated Risk Detection
-* Regulatory Change Monitoring
-* Predictive Compliance Analytics
+* NestJS API baseline
+* Stellar payment service
+* shared configuration packages
+* shared domain types
+* contributor documentation
+* architecture guidelines
 
 ---
 
 # Vision
 
-HealX aims to become the infrastructure layer for healthcare compliance—providing secure APIs, programmable payments, and verifiable audit trails that enable organizations to demonstrate trust, automate governance workflows, and simplify regulatory reporting at scale. By combining modern cloud architecture with the Stellar Network, HealX delivers a developer-friendly platform where compliance becomes faster, more transparent, and economically efficient for providers, auditors, insurers, and regulatory partners.
+HealX aims to become the infrastructure layer for healthcare compliance, enabling healthcare providers, insurers, auditors, and regulators to exchange compliance data through secure, verifiable, and programmable APIs.
+
+By combining enterprise-grade backend services with blockchain-powered payment settlement, HealX seeks to make healthcare governance more transparent, auditable, and developer-friendly, while providing a scalable foundation for the next generation of compliance automation.
+
+---
+
+## License
+
+MIT
+ platform and gives contributors clear ownership boundaries for backend, blockchain, SDK, and shared infrastructure.
