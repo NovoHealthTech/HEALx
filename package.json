@@ -24,7 +24,7 @@
     "start:api": "npm run start:dev --workspace @healx/api",
     "start:stellar": "npm run start:dev --workspace @healx/stellar-service",
     "test": "npm run test --workspaces --if-present",
-    "typecheck": "tsc -b apps/api apps/stellar-service packages/config packages/types"
+    "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.15",

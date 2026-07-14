@@ -13,5 +13,8 @@
   "dependencies": {
     "@healx/config": "*",
     "@healx/types": "*"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
   }
 }
