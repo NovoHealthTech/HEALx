@@ -14,7 +14,12 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
+    "db:generate": "npm run prisma:generate --workspace @healx/database",
+    "db:migrate": "npm run prisma:migrate --workspace @healx/database",
+    "db:studio": "npm run prisma:studio --workspace @healx/database",
+    "dev:infra": "docker compose up -d postgres redis",
     "format": "prettier --write \"**/*.{ts,js,json,md,yml,yaml}\"",
+    "infra:ready": "tools/wait-for-infra.sh",
     "lint": "eslint \"{apps,packages}/**/*.ts\"",
     "start:api": "npm run start:dev --workspace @healx/api",
     "start:stellar": "npm run start:dev --workspace @healx/stellar-service",
@@ -50,5 +55,8 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.2"
+  },
+  "optionalDependencies": {
+    "prisma": "^6.1.0"
   }
 }
