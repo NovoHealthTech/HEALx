@@ -358,4 +358,3 @@ By combining enterprise-grade backend services with blockchain-powered payment s
 
 MIT
  platform and gives contributors clear ownership boundaries for backend, blockchain, SDK, and shared infrastructure.
-
