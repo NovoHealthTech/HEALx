@@ -1,223 +1,361 @@
 # HealX
 
-**HealX** is a healthcare Governance, Risk, and Compliance (GRC) platform that provides a developer-first API for managing compliance evidence, audit workflows, risk management, regulatory reporting, and premium API access.
+**HealX** is a healthcare Governance, Risk, and Compliance (GRC) platform that provides a developer-first API for managing compliance evidence, audit workflows, risk management, and regulatory reporting.
 
-Built with **NestJS** and powered by the **Stellar Network**, HealX combines enterprise-grade backend architecture with blockchain-based payment settlement and access verification. Healthcare data stays off-chain; Stellar is used for payment settlement, authorization proofs, and immutable payment records.
+Built with **NestJS** and powered by the **Stellar Network**, HealX combines enterprise-grade backend architecture with blockchain-based payment settlement and access verification, enabling organizations to securely share compliance data while monetizing premium API access.
 
-This repository has intentionally been reset to a clean slate. The next build should start as a modular monorepo with clear service boundaries, strong tenant isolation, and production-grade developer experience from the first sprint.
+The platform is designed as a modular monorepo to support scalable development across compliance services, payment infrastructure, reporting, and shared domain packages.
 
-## Product Scope
+---
 
-HealX supports healthcare organizations that need a structured API platform for:
+# Overview
 
-- organization and department management
-- authentication, authorization, RBAC, ABAC, and API keys
-- regulatory frameworks, controls, policies, and evidence mapping
-- risk registers, scoring, treatment plans, and residual risk tracking
-- audit planning, evidence requests, findings, CAPA, and audit reports
-- secure evidence storage, metadata indexing, versioning, and integrity checks
-- incident reporting, investigation, root cause analysis, and corrective actions
-- automated reporting, exports, executive summaries, and evidence packages
-- Stellar-based API monetization, USDC settlement, and premium endpoint access
+Healthcare organizations operate under strict regulatory requirements, generating large volumes of compliance evidence, audit records, policies, incident reports, and risk assessments.
 
-## Target Architecture
+Unfortunately, these records are often scattered across multiple systems, making audits expensive, slow, and difficult to verify.
 
-| Layer | Technology |
-| --- | --- |
-| API | NestJS |
-| Database | PostgreSQL |
-| ORM | Prisma |
-| Queue | BullMQ |
-| Cache | Redis |
-| Object Storage | AWS S3-compatible storage |
-| Blockchain | Stellar + Soroban |
-| Documentation | Swagger / OpenAPI |
-| Shared Config | `@healx/config` |
-| Shared Types | `@healx/types` |
-| SDK | `@healx/sdk` |
+HealX provides a unified API platform for managing healthcare governance and compliance through structured services that support:
 
-## Planned Repository Structure
+* governance and organizational management,
+* regulatory compliance frameworks,
+* audit planning and evidence collection,
+* risk assessment and treatment,
+* incident management,
+* secure document storage,
+* programmable API monetization using Stellar.
+
+Rather than storing sensitive healthcare information on-chain, HealX uses Stellar as a trusted payment and authorization layer while maintaining protected data securely off-chain.
+
+---
+
+# Core Modules
+
+## Authentication & Access Control
+
+HealX begins with a secure authentication and authorization layer built for enterprise healthcare organizations.
+
+It supports:
+
+* organization authentication
+* JWT authentication
+* API key management
+* role-based access control (RBAC)
+* attribute-based permissions (ABAC)
+* multi-tenant access isolation
+* secure session management
+
+This forms the foundation for every protected API within the platform.
+
+---
+
+## Organization Management
+
+Organizations are the primary tenants within HealX.
+
+Capabilities include:
+
+* organization onboarding
+* department management
+* user invitations
+* role assignment
+* tenant isolation
+* organization settings
+* audit ownership
+
+This ensures each healthcare organization operates within an isolated compliance environment.
+
+---
+
+## Governance & Compliance
+
+HealX enables organizations to implement structured compliance programs.
+
+The platform supports:
+
+* compliance frameworks
+* regulatory controls
+* policy management
+* evidence mapping
+* control ownership
+* compliance status tracking
+* framework versioning
+
+Designed to support standards such as HIPAA, ISO 27001, SOC 2, NIST, and custom regulatory frameworks.
+
+---
+
+## Risk Management
+
+Organizations can identify, assess, and mitigate operational risks through structured workflows.
+
+Capabilities include:
+
+* risk registers
+* risk scoring
+* likelihood and impact analysis
+* treatment planning
+* residual risk tracking
+* ownership assignment
+* risk reporting
+
+The risk module integrates directly with audits and compliance controls.
+
+---
+
+## Audit Management
+
+HealX streamlines internal and external audit processes.
+
+Supported capabilities include:
+
+* audit planning
+* evidence requests
+* audit findings
+* observations
+* corrective actions (CAPA)
+* audit reports
+* historical audit records
+
+The audit workflow creates a complete, traceable compliance history.
+
+---
+
+## Evidence Management
+
+Evidence is central to regulatory compliance.
+
+HealX provides:
+
+* secure evidence uploads
+* metadata indexing
+* version history
+* S3-backed storage
+* integrity verification
+* evidence lifecycle management
+
+Sensitive documents remain securely stored off-chain while maintaining verifiable access records.
+
+---
+
+## Incident Management
+
+Healthcare organizations can document operational and security incidents through structured workflows.
+
+The platform supports:
+
+* incident reporting
+* severity classification
+* investigation tracking
+* root cause analysis
+* corrective actions
+* incident timelines
+
+Incident records become part of the organization's overall compliance posture.
+
+---
+
+## Reporting
+
+HealX provides automated reporting capabilities across all governance modules.
+
+Reports include:
+
+* compliance summaries
+* audit reports
+* risk dashboards
+* executive reports
+* evidence packages
+* PDF generation
+* export APIs
+
+Reports can be generated programmatically through the public API.
+
+---
+
+## Stellar Payment Layer
+
+HealX uses the Stellar Network as a programmable payment and authorization layer.
+
+The Stellar service enables:
+
+* API micropayments
+* premium endpoint access
+* transaction verification
+* USDC settlement
+* programmable billing
+* immutable payment records
+
+Rather than storing compliance data on-chain, Stellar is responsible for payment settlement and cryptographic verification before protected resources are served.
+
+---
+
+# System Architecture
+
+HealX is built as a modular monorepo with clearly defined service boundaries.
+
+| Layer          | Technology        |
+| -------------- | ----------------- |
+| API            | NestJS            |
+| Database       | PostgreSQL        |
+| ORM            | Prisma            |
+| Queue          | BullMQ            |
+| Cache          | Redis             |
+| Object Storage | AWS S3            |
+| Blockchain     | Stellar + Soroban |
+| Documentation  | Swagger / OpenAPI |
+| Shared Config  | @healx/config     |
+| Shared Types   | @healx/types      |
+
+---
+
+# Repository Structure
 
 ```text
 healx/
+│
 ├── apps/
-│   ├── api/                 # Main NestJS API
-│   └── stellar-service/     # Stellar payment and verification worker
+│   ├── api/                 # NestJS backend
+│   └── stellar-service/     # Stellar payment integration
+│
 ├── packages/
-│   ├── config/              # Shared typed configuration
-│   ├── database/            # Prisma schema, migrations, seeders
+│   ├── config/              # Shared configuration
 │   ├── types/               # Shared domain types
-│   └── sdk/                 # Future public API client SDK
+│   └── sdk/                 # Future API client SDK
+│
 ├── contracts/
-│   └── soroban/             # Future Soroban contracts
-├── docs/                    # Architecture, API, security, compliance notes
-└── tools/                   # Scripts, generators, local automation
+│   └── soroban/             # Smart contracts
+│
+└── docs/
 ```
 
-## Delivery Strategy
+---
 
-The project should first reach a satisfactory foundation before feature velocity increases. The early contribution roadmap therefore prioritizes architecture, local development, quality gates, and data boundaries before expanding into compliance workflows and Stellar monetization.
+# MVP Delivery Plan
 
-Each issue should include:
+Development follows structured infrastructure milestones:
 
-- clear problem statement
-- implementation notes
-- acceptance criteria
-- test expectations
-- documentation impact
+1. Authentication & multi-tenancy
+2. Organization management
+3. Governance & compliance
+4. Risk management
+5. Audit workflows
+6. Evidence management
+7. Reporting engine
+8. Stellar payment integration
+9. Public API & SDK
+10. Production hardening
 
-## Contribution Roadmap
+Each milestone expands the platform while maintaining strict module boundaries and backwards compatibility.
 
-### Sprint 1: Foundation Reset and Monorepo Baseline
+---
 
-1. Scaffold npm workspace monorepo with `apps`, `packages`, `contracts`, `docs`, and `tools`.
-2. Create `apps/api` as a fresh NestJS application with strict TypeScript enabled.
-3. Create `apps/stellar-service` as a NestJS worker/service shell.
-4. Add root `package.json` with workspace scripts for build, lint, test, format, and typecheck.
-5. Add shared `tsconfig` presets for applications and packages.
-6. Add ESLint flat config for TypeScript and NestJS conventions.
-7. Add Prettier config and formatting scripts.
-8. Add `.gitignore` for Node, build artifacts, environment files, coverage, and local tooling.
-9. Add `.editorconfig` for consistent contributor formatting.
-10. Add `.nvmrc` or `.node-version` targeting Node.js 20+.
-11. Add `packages/config` with typed environment configuration helpers.
-12. Add root environment example file with required local variables.
-13. Add Docker Compose for PostgreSQL and Redis.
-14. Add local healthcheck script for database and cache readiness.
-15. Add `packages/database` with Prisma initialized.
-16. Define initial Prisma datasource and generator settings.
-17. Add migration workflow documentation for local development.
-18. Add API bootstrap with global validation pipe.
-19. Add API bootstrap with global exception filter.
-20. Add request logging middleware with request IDs.
-21. Add basic `/health` endpoint for the API.
-22. Add basic `/health` endpoint for the Stellar service.
-23. Add Jest unit test setup for apps and packages.
-24. Add e2e test setup for `apps/api`.
-25. Add CI workflow for install, lint, typecheck, test, and build.
+# Getting Started
 
-### Sprint 2: Identity, Tenancy, and Access Control
+## Requirements
 
-26. Model users, organizations, memberships, roles, permissions, and API keys in Prisma.
-27. Create initial database migration for identity and tenancy tables.
-28. Add seed data for local organization, admin user, and baseline roles.
-29. Implement password hashing service using a stable adapter interface.
-30. Implement user registration within an organization onboarding flow.
-31. Implement login endpoint with JWT access tokens.
-32. Implement refresh token persistence and rotation.
-33. Add logout endpoint that revokes refresh tokens.
-34. Add current user profile endpoint.
-35. Add organization context resolver from authenticated requests.
-36. Add tenant isolation guard for organization-scoped resources.
-37. Implement RBAC permission catalog.
-38. Implement role assignment APIs.
-39. Implement role removal APIs.
-40. Implement ABAC policy evaluation interface.
-41. Add membership invitation model and endpoints.
-42. Add invitation acceptance flow.
-43. Add organization settings model and endpoints.
-44. Implement department model and CRUD endpoints.
-45. Implement API key creation endpoint.
-46. Implement API key hashing and verification.
-47. Implement API key revocation endpoint.
-48. Add authentication Swagger documentation.
-49. Add auth and tenancy e2e tests.
-50. Add security notes for token, API key, and tenant isolation behavior.
+* Node.js 20+
+* npm 10+
+* PostgreSQL
+* Redis
 
-### Sprint 3: Governance, Compliance, and Risk Core
+---
 
-51. Model compliance frameworks, framework versions, controls, policies, and evidence mappings.
-52. Create migrations for governance and compliance tables.
-53. Add framework CRUD endpoints.
-54. Add framework versioning endpoints.
-55. Add control CRUD endpoints.
-56. Add control ownership assignment endpoints.
-57. Add policy CRUD endpoints.
-58. Add policy status and approval workflow fields.
-59. Add evidence mapping endpoints for controls and policies.
-60. Add compliance status calculation service.
-61. Add compliance summary endpoint per organization.
-62. Add import seed for HIPAA starter framework placeholders.
-63. Add import seed for ISO 27001 starter framework placeholders.
-64. Add custom framework creation workflow tests.
-65. Model risk registers, risks, scoring scales, treatments, and residual risk.
-66. Create migrations for risk management tables.
-67. Add risk register CRUD endpoints.
-68. Add risk item CRUD endpoints.
-69. Add likelihood and impact scoring service.
-70. Add inherent risk calculation.
-71. Add treatment plan endpoints.
-72. Add residual risk calculation.
-73. Link risks to controls and policies.
-74. Add governance and risk Swagger documentation.
-75. Add governance, compliance, and risk e2e tests.
+## Installation
 
-### Sprint 4: Audits, Evidence, Incidents, and Reporting
+```bash
+npm install
+```
 
-76. Model audits, audit scopes, evidence requests, findings, observations, and CAPA.
-77. Create migrations for audit workflow tables.
-78. Add audit plan CRUD endpoints.
-79. Add audit scope management endpoints.
-80. Add evidence request endpoints.
-81. Add finding and observation endpoints.
-82. Add CAPA creation and tracking endpoints.
-83. Add audit status transition rules.
-84. Add audit report data aggregation service.
-85. Model evidence files, metadata, versions, checksums, and lifecycle states.
-86. Add S3-compatible storage adapter interface.
-87. Add local development storage adapter.
-88. Add secure evidence upload endpoint.
-89. Add evidence metadata indexing endpoint.
-90. Add evidence version history endpoint.
-91. Add evidence integrity verification using checksums.
-92. Link evidence to controls, policies, risks, and audits.
-93. Model incidents, severity, timelines, investigation notes, and corrective actions.
-94. Add incident CRUD endpoints.
-95. Add incident timeline endpoint.
-96. Add root cause analysis fields and endpoints.
-97. Add reporting module shell.
-98. Add compliance summary report endpoint.
-99. Add audit report export endpoint.
-100. Add PDF report generation proof of concept.
+---
 
-### Sprint 5: Stellar, Public API, SDK, and Production Hardening
+## Run development environment
 
-101. Define Stellar payment domain model for wallets, payments, invoices, and access grants.
-102. Create migrations for payment and entitlement tables.
-103. Add Stellar configuration package with network, issuer, and asset settings.
-104. Implement Stellar account lookup service.
-105. Implement transaction verification service.
-106. Implement USDC payment verification flow.
-107. Implement premium endpoint access grant after verified payment.
-108. Add payment webhook ingestion endpoint.
-109. Add idempotency handling for payment verification.
-110. Add immutable payment record storage.
-111. Add Soroban contract folder scaffold.
-112. Add Soroban contract design document.
-113. Add premium API guard that checks API key, entitlement, and payment state.
-114. Add public API rate limiting.
-115. Add usage metering for API keys.
-116. Add billing usage summary endpoint.
-117. Add OpenAPI generation script.
-118. Add `packages/sdk` scaffold generated from OpenAPI.
-119. Add SDK authentication helper.
-120. Add SDK examples for compliance, evidence, and payments.
-121. Add production Dockerfile for API.
-122. Add production Dockerfile for Stellar service.
-123. Add deployment environment documentation.
-124. Add observability baseline with metrics, logs, and tracing plan.
-125. Add production readiness checklist covering security, privacy, backups, migrations, and incident response.
+```bash
+npm run dev
+```
 
-## Definition of Satisfactory Baseline
+---
 
-HealX reaches a satisfactory initial level when:
+## Architecture validation
 
-- the monorepo builds from a clean install
-- local PostgreSQL and Redis run through Docker Compose
-- Prisma migrations are reproducible
-- authentication, tenancy, and RBAC have e2e coverage
-- API boundaries are documented through OpenAPI
-- CI blocks broken lint, typecheck, tests, and builds
-- Stellar integration has a verified testnet payment proof of concept
-- no sensitive healthcare data is placed on-chain
+Before contributing:
+
+```bash
+npm run check:architecture
+npm run check:boundaries
+```
+
+---
+
+# Environment Setup
+
+Create a root `.env` from the provided template before running services locally.
+
+Each workspace may also define:
+
+```text
+apps/api/.env.example
+apps/stellar-service/.env.example
+```
+
+---
+
+# Documentation
+
+* Architecture: `docs/architecture.md`
+* API Reference: `docs/api.md`
+* MVP Scope: `docs/mvp-scope.md`
+* Contributor Guide: `CONTRIBUTING.md`
+* Roadmap: `docs/roadmap.md`
+
+---
+
+## Local Development
+
+See [docs/local-development.md](docs/local-development.md) for Docker Compose, PostgreSQL, Redis, and Prisma migration workflow instructions.
+
+---
+
+# Contribution Model
+
+HealX is designed for milestone-driven infrastructure development.
+
+To maintain consistency:
+
+* keep changes within a single module
+* use shared types for cross-service communication
+* avoid duplicating business logic
+* respect service boundaries (API vs Stellar vs shared packages)
+* maintain backwards-compatible APIs where possible
+* ensure healthcare compliance workflows remain auditable and traceable
+
+---
+
+# Current State
+
+This repository provides the foundation for the HealX platform.
+
+Current scaffolding includes:
+
+* NestJS API baseline
+* Stellar payment service
+* shared configuration packages
+* shared domain types
+* contributor documentation
+* architecture guidelines
+
+---
+
+# Vision
+
+HealX aims to become the infrastructure layer for healthcare compliance, enabling healthcare providers, insurers, auditors, and regulators to exchange compliance data through secure, verifiable, and programmable APIs.
+
+By combining enterprise-grade backend services with blockchain-powered payment settlement, HealX seeks to make healthcare governance more transparent, auditable, and developer-friendly, while providing a scalable foundation for the next generation of compliance automation.
+
+---
+
+## License
+
+MIT
+ platform and gives contributors clear ownership boundaries for backend, blockchain, SDK, and shared infrastructure.
 
